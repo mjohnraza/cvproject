@@ -1,10 +1,14 @@
-[{"stream_name":"stdout","time":3.434163056,"data":"=== Kaggle IMC 2025/2026: PU-AMatch OmniAutoML Solution ===\n"}
-,{"stream_name":"stdout","time":3.48265165,"data":"Loaded 1945 test pairs from /kaggle/input/image-matching-challenge-2025/sample_submission.csv\n"}
-,{"stream_name":"stdout","time":3.624052047,"data":"Generated submission.csv successfully.\n"}
-,{"stream_name":"stderr","time":6.173495331,"data":"/usr/local/lib/python3.13/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
-,{"stream_name":"stderr","time":6.173523614,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
-,{"stream_name":"stderr","time":6.474749542,"data":"/usr/local/lib/python3.13/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
-,{"stream_name":"stderr","time":6.474776245,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
-,{"stream_name":"stderr","time":8.425134713,"data":"[NbConvertApp] Converting notebook __script__.ipynb to html\n"}
-,{"stream_name":"stderr","time":9.492417772,"data":"[NbConvertApp] Writing 307352 bytes to __results__.html\n"}
+[{"stream_name":"stdout","time":3.55757981,"data":"=== Kaggle IMC 2025/2026: PU-AMatch OmniAutoML Solution ===\n"}
+,{"stream_name":"stdout","time":3.608513075,"data":"Loaded 1945 rows from /kaggle/input/image-matching-challenge-2025/sample_submission.csv\n"}
+,{"stream_name":"stdout","time":3.608548369,"data":"Input columns: ['image_id', 'dataset', 'scene', 'image', 'rotation_matrix', 'translation_vector']\n"}
+,{"stream_name":"stdout","time":3.64855534,"data":"Generated submission.csv successfully (1945 rows).\n"}
+,{"stream_name":"stdout","time":3.648580153,"data":"Output columns: ['image_id', 'dataset', 'scene', 'image', 'rotation_matrix', 'translation_vector']\n"}
+,{"stream_name":"stdout","time":3.648584605,"data":"Sample row:\n"}
+,{"stream_name":"stdout","time":3.648815285,"data":"{'image_id': 'ETs_another_et_another_et001.png_public', 'dataset': 'ETs', 'scene': 'cluster0', 'image': 'another_et_another_et001.png', 'rotation_matrix': '0.984538905;0.811159853;0.681088421;0.845092853;0.638842711;0.183570696;0.075868286;0.663749411;0.658267773', 'translation_vector': '0.427962849;0.408638396;0.184856919'}\n"}
+,{"stream_name":"stderr","time":6.12303238,"data":"/usr/local/lib/python3.13/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
+,{"stream_name":"stderr","time":6.123058177,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
+,{"stream_name":"stderr","time":6.433008632,"data":"/usr/local/lib/python3.13/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
+,{"stream_name":"stderr","time":6.433034935,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
+,{"stream_name":"stderr","time":8.341311928,"data":"[NbConvertApp] Converting notebook __script__.ipynb to html\n"}
+,{"stream_name":"stderr","time":9.424219671,"data":"[NbConvertApp] Writing 313649 bytes to __results__.html\n"}
 ]

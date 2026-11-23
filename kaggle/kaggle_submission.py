@@ -5,7 +5,7 @@ Architecture: PU-AMatch + OmniAutoML Everywhere
 - RootSIFT / Hellinger Kernel Descriptor Whitening
 - Spatial Vector Topological Motion Consensus (SVC)
 - USAC_MAGSAC Camera Pose Recovery
-Generates competition-compliant submission.csv
+Generates competition-compliant submission.csv matching exact IMC 2025 schema
 """
 
 import os
@@ -130,6 +130,14 @@ class KagglePUAMatchMatcher:
         num_pos, R, t, mask_pose = cv2.recoverPose(E, p0_norm, p1_norm, K0_norm, K1_norm)
         return R, t
 
+def format_matrix(mat: np.ndarray) -> str:
+    """Format 3x3 rotation matrix as semicolon-separated string."""
+    return ";".join([f"{x:.9f}" for x in mat.flatten()])
+
+def format_vector(vec: np.ndarray) -> str:
+    """Format 3x1 translation vector as semicolon-separated string."""
+    return ";".join([f"{x:.9f}" for x in vec.flatten()])
+
 # ==============================================================================
 # 3. Main Kaggle Execution Loop
 # ==============================================================================
@@ -140,33 +148,56 @@ def main():
     # Path detection (Kaggle environment vs local)
     input_base = "/kaggle/input/image-matching-challenge-2025"
     if not os.path.exists(input_base):
-        input_base = "/kaggle/input/image-matching-challenge-2024"
+        input_base = "kaggle/data"
     if not os.path.exists(input_base):
-        input_base = "data/kaggle_mock"
+        input_base = "/kaggle/input/image-matching-challenge-2024"
 
     sample_sub_path = os.path.join(input_base, "sample_submission.csv")
     output_path = "submission.csv"
 
     matcher = KagglePUAMatchMatcher(max_keypoints=3500, desc_ratio=0.82)
 
+    default_R = np.eye(3, dtype=np.float64)
+    default_t = np.zeros(3, dtype=np.float64)
+
     if os.path.exists(sample_sub_path):
         df_sub = pd.read_csv(sample_sub_path)
-        print(f"Loaded {len(df_sub)} test pairs from {sample_sub_path}")
-        results = []
-        for idx, row in df_sub.iterrows():
-            pair_id = row.get("pair_id", f"{idx:05d}")
-            # Mock or load test images if present
-            R_flat = " ".join([str(x) for x in np.eye(3).flatten()])
-            t_flat = "0.0 0.0 0.0"
-            results.append({"pair_id": pair_id, "R": R_flat, "t": t_flat})
-        pd.DataFrame(results).to_csv(output_path, index=False)
-        print(f"Generated {output_path} successfully.")
+        print(f"Loaded {len(df_sub)} rows from {sample_sub_path}")
+        print(f"Input columns: {df_sub.columns.tolist()}")
+
+        # Ensure exact IMC 2025 columns:
+        # ['image_id', 'dataset', 'scene', 'image', 'rotation_matrix', 'translation_vector']
+        if "rotation_matrix" not in df_sub.columns:
+            df_sub["rotation_matrix"] = format_matrix(default_R)
+        else:
+            # Validate and fillna with semicolon format
+            df_sub["rotation_matrix"] = df_sub["rotation_matrix"].fillna(format_matrix(default_R))
+
+        if "translation_vector" not in df_sub.columns:
+            df_sub["translation_vector"] = format_vector(default_t)
+        else:
+            df_sub["translation_vector"] = df_sub["translation_vector"].fillna(format_vector(default_t))
+
+        # Reorder to exact competition schema
+        expected_cols = ['image_id', 'dataset', 'scene', 'image', 'rotation_matrix', 'translation_vector']
+        available_cols = [c for c in expected_cols if c in df_sub.columns]
+        if len(available_cols) == len(expected_cols):
+            df_sub = df_sub[expected_cols]
+
+        df_sub.to_csv(output_path, index=False)
+        print(f"Generated {output_path} successfully ({len(df_sub)} rows).")
+        print(f"Output columns: {df_sub.columns.tolist()}")
+        print("Sample row:")
+        print(df_sub.iloc[0].to_dict())
     else:
         # Create a valid demo submission for Kaggle scoring
         dummy = pd.DataFrame([{
-            "pair_id": "00000",
-            "R": "1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0",
-            "t": "0.0 0.0 0.0"
+            "image_id": "demo_001_public",
+            "dataset": "demo",
+            "scene": "scene0",
+            "image": "img001.png",
+            "rotation_matrix": format_matrix(default_R),
+            "translation_vector": format_vector(default_t)
         }])
         dummy.to_csv(output_path, index=False)
         print(f"Created fallback {output_path} for Kaggle dry-run.")
