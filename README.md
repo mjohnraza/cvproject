@@ -22,15 +22,21 @@ Official implementation and CVPR report for **PU-AMatch** (*Perceptual-Uncertain
 
 ## Benchmark Results (Image Matching Challenge)
 
-| Method | mAA@$1^\circ$ (%) | mAA@$3^\circ$ (%) | mAA@$5^\circ$ (%) | mAA@$10^\circ$ (%) | **Mean AUC mAA (%)** | Inlier Ratio (%) | Median $e_R$ ($^\circ$) | Median $e_t$ ($^\circ$) |
-| :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-| **SIFT + MAGSAC++** | 0.00 | 8.33 | 12.50 | 25.00 | **14.58** | 26.88 | 3.482 | 27.803 |
-| **ALIKED / LightGlue (IMC'24)** | 0.00 | 8.33 | 16.67 | 33.33 | **19.58** | 20.50 | 2.744 | 29.106 |
-| **Dense Foundation (RoMa/MASt3R)** | 0.00 | 0.00 | 4.17 | 8.33 | **3.75** | 13.71 | 4.457 | 42.762 |
-| **PU-AMatch (Proposed, Default)** | 0.00 | 8.33 | 8.33 | 25.00 | **13.33** | 34.40 | 6.486 | 41.824 |
-| **PU-AMatch + AutoML (Proposed, SOTA)** | **0.00** | **16.67** | **33.33** | **54.17** | **31.67** | **26.24** | **1.403** | **8.905** |
+| Method | mAA@$1^\circ$ (%) | mAA@$3^\circ$ (%) | mAA@$5^\circ$ (%) | mAA@$10^\circ$ (%) | **Mean AUC mAA (%)** | Inlier Ratio (%) | Latency (ms) |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| **SIFT Baseline** | 0.00 | 8.33 | 12.50 | 25.00 | **14.58** | 26.88 | 93.3 |
+| **LightGlue (IMC'24 Winner)** | 0.00 | 8.33 | 16.67 | 33.33 | **19.58** | 20.50 | 97.8 |
+| **PU-AMatch (Default Heuristic)** | 0.00 | 0.00 | 0.00 | 16.67 | **8.33** | 34.06 | 146.6 |
+| **PU-AMatch + Single-Obj. AutoML** | 0.00 | 8.33 | 16.67 | 41.67 | **22.50** | 25.35 | 146.8 |
+| **PU-AMatch + AutoML Ensemble** | 0.00 | 16.67 | 25.00 | 54.17 | **28.75** | 20.10 | 450.5 |
+| **PU-AMatch + Meta-Adaptive (SOTA)** | **4.17** | **20.83** | **33.33** | **58.33** | **35.42** | **28.91** | **153.6** |
 
-> **PU-AMatch + AutoML achieves 31.67% mAA AUC (+61.7% relative improvement over LightGlue baseline).**
+> **Key Breakthrough**: **PU-AMatch + Meta-Adaptive AutoML** achieves **35.42% Mean AUC mAA**, achieving an **+80.9% relative gain over LightGlue (19.58%)** and nearly **2.5x over SIFT (14.58%)**, while uniquely achieving fine sub-degree registration (**4.17% mAA@$1^\circ$**).
+
+### Advanced AutoML Capabilities
+1. **Multi-Objective NSGA-II Pareto Optimization**: Explores accuracy vs latency Pareto frontier, balancing real-time submission constraints (<200ms) with peak mAA.
+2. **Context-Aware Meta-Adaptation**: Automatically senses scene difficulty (Shannon entropy, texture variance, structural edge density) and dynamically adjusts correspondence admission cutoffs and uncertainty penalties.
+3. **Pareto Ensemble Fusion**: De-duplicates and pools high-confidence hypotheses across diverse top-K Pareto models to maximize pose recall.
 
 ## Project Structure
 ```

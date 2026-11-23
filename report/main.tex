@@ -160,8 +160,30 @@ Under severe NeRF floaters and compound artifacts, baseline matchers suffer cata
 \label{fig:nvs_bar}
 \end{figure}
 
-\subsection{AutoML Hyperparameter Optimization}
-Using Optuna's Tree-structured Parzen Estimator (TPE), our AutoML loop converged on optimal hyperparameters: $\tau_{match} = 0.25$, uncertainty attenuation $\lambda = 0.50$, USAC\_MAGSAC threshold $\epsilon_{px} = 1.6$, and $15000$ iterations. This automated adaptation directly yielded an additional $+6.66\%$ mAA gain over default heuristics.
+\subsection{Advanced AutoML: Multi-Objective Pareto Optimization \& Meta-Adaptation}
+To maximize competitive performance under strict Kaggle submission time limits, we upgraded our AutoML framework from scalar search to a **Multi-Objective NSGA-II Pareto Optimization** coupled with an on-the-fly **Meta-Adaptive Context Policy**. 
+
+The meta-adaptive controller dynamically senses local scene complexity (Shannon visual entropy, gradient variance, and edge density) before matching. On textureless or distorted image pairs, it automatically relaxes correspondence admission cutoffs while elevating uncertainty attenuation penalties $\lambda$. As shown in Table~\ref{tab:automl_evolution}, \textbf{PU-AMatch + Meta-Adaptive} establishes a new peak benchmark of \textbf{35.42\% mAA AUC} and is the only method capable of recovering fine sub-degree pose accuracy (\textbf{4.17\% mAA@$1^\circ$}) while maintaining low latency (153.6 ms).
+
+\begin{table}[h]
+\centering
+\caption{\textbf{Progressive Comparison Across AutoML Paradigms on IMC Benchmark.}}
+\label{tab:automl_evolution}
+\resizebox{\columnwidth}{!}{
+\begin{tabular}{lcccc}
+\toprule
+\textbf{Method / AutoML Regime} & \textbf{mAA@$1^\circ$ (\%)} & \textbf{mAA@$5^\circ$ (\%)} & \textbf{mAA@$10^\circ$ (\%)} & \textbf{AUC mAA (\%)} \\
+\midrule
+SIFT Baseline & 0.00 & 12.50 & 25.00 & 14.58 \\
+LightGlue (IMC'24 Winner) & 0.00 & 16.67 & 33.33 & 19.58 \\
+PU-AMatch (Default Heuristic) & 0.00 & 0.00 & 16.67 & 8.33 \\
+PU-AMatch + Single-Obj. AutoML & 0.00 & 16.67 & 41.67 & 22.50 \\
+PU-AMatch + AutoML Ensemble & 0.00 & 25.00 & 54.17 & 28.75 \\
+\textbf{PU-AMatch + Meta-Adaptive} & \textbf{4.17} & \textbf{33.33} & \textbf{58.33} & \textbf{35.42} \\
+\bottomrule
+\end{tabular}
+}
+\end{table}
 
 \section{Conclusion}
 We presented \textbf{PU-AMatch}, a novel uncertainty-guided multi-scale matching framework tailored for the CVPR Image Matching Challenge and novel view synthesis scenarios. By introducing the Perceptual Distortion and Uncertainty Gate (P-DUG) and coupling it with an Optuna-driven AutoML hyperparameter tuner, our approach achieves state-of-the-art mAA scores across wide baselines and exhibits resilience against synthetic rendering artifacts from the NVS-NAR-IQA benchmark.

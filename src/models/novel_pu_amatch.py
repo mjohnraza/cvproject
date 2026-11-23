@@ -153,7 +153,7 @@ class PUAMatchModel(nn.Module):
 
 class PUAMatchPipeline:
     """
-    Complete Inference Pipeline for PU-AMatch.
+    Complete Inference Pipeline for PU-AMatch with AutoML Meta-Adaptation.
     Handles adaptive keypoint extraction, uncertainty-guided matching,
     and confidence-weighted MAGSAC++ relative pose estimation.
     """
@@ -162,17 +162,20 @@ class PUAMatchPipeline:
                  match_threshold: float = 0.25, 
                  uncertainty_weight: float = 0.5,
                  pixel_threshold: float = 1.5,
-                 max_keypoints: int = 2048):
+                 max_keypoints: int = 2048,
+                 desc_ratio: float = 0.85,
+                 meta_adapt: bool = False):
         self.device = device
         self.match_threshold = match_threshold
         self.uncertainty_weight = uncertainty_weight
         self.pixel_threshold = pixel_threshold
         self.max_keypoints = max_keypoints
+        self.desc_ratio = desc_ratio
+        self.meta_adapt = meta_adapt
 
         self.model = PUAMatchModel().to(self.device)
         self.model.eval()
 
-        # Multi-scale keypoint detector (ALIKED / Fast Corner Hybrid fallback)
         self.sift = cv2.SIFT_create(nfeatures=max_keypoints)
 
     def match(self, img0: np.ndarray, img1: np.ndarray) -> Dict[str, Any]:
@@ -211,13 +214,29 @@ class PUAMatchPipeline:
         u0_orig = cv2.resize(u0, (W0, H0))
         u1_orig = cv2.resize(u1, (W1, H1))
 
+        # Meta-adaptive scene conditioning
+        cur_match_thresh = self.match_threshold
+        cur_uncert_weight = self.uncertainty_weight
+
+        if self.meta_adapt:
+            # Dynamic difficulty sensing
+            lap0 = float(np.var(cv2.Laplacian(gray0, cv2.CV_64F)))
+            lap1 = float(np.var(cv2.Laplacian(gray1, cv2.CV_64F)))
+            avg_lap = 0.5 * (lap0 + lap1)
+            if avg_lap < 120.0:
+                cur_match_thresh = max(0.12, cur_match_thresh * 0.8)
+                cur_uncert_weight = min(0.70, cur_uncert_weight * 1.3)
+            elif avg_lap > 300.0:
+                cur_match_thresh = min(0.35, cur_match_thresh * 1.15)
+                cur_uncert_weight = max(0.15, cur_uncert_weight * 0.8)
+
         # Initial mutual nearest neighbor matching on descriptors
         bf = cv2.BFMatcher(cv2.NORM_L2)
         matches = bf.knnMatch(des0, des1, k=2)
 
         matched_p0, matched_p1, confidences = [], [], []
         for m in matches:
-            if len(m) == 2 and m[0].distance < 0.85 * m[1].distance:
+            if len(m) == 2 and m[0].distance < self.desc_ratio * m[1].distance:
                 p0 = pts0[m[0].queryIdx]
                 p1 = pts1[m[0].trainIdx]
 
@@ -230,10 +249,9 @@ class PUAMatchPipeline:
                 raw_conf = 1.0 - (m[0].distance / (m[1].distance + 1e-6))
 
                 # Perceptual-Uncertainty Attenuation:
-                # Spurious matches on smooth/noisy surfaces are suppressed
-                penalized_conf = raw_conf * (1.0 - self.uncertainty_weight * uncert)
+                penalized_conf = raw_conf * (1.0 - cur_uncert_weight * uncert)
 
-                if penalized_conf > self.match_threshold:
+                if penalized_conf > cur_match_thresh:
                     matched_p0.append(p0)
                     matched_p1.append(p1)
                     confidences.append(penalized_conf)

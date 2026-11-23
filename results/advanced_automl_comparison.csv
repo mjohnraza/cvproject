@@ -1,0 +1,7 @@
+Method,mAA@1deg (%),mAA@3deg (%),mAA@5deg (%),mAA@10deg (%),mAA AUC (%),Inlier Ratio (%),Latency (ms)
+SIFT Baseline,0.0,8.33,12.5,25.0,14.58,26.88,93.3
+LightGlue (IMC'24),0.0,8.33,16.67,33.33,19.58,20.5,97.8
+PU-AMatch (Default),0.0,0.0,0.0,16.67,8.33,34.06,146.6
+PU-AMatch + AutoML (Single),0.0,8.33,16.67,41.67,22.5,25.35,146.8
+PU-AMatch + Meta-Adaptive,4.17,20.83,33.33,58.33,35.42,28.91,153.6
+PU-AMatch + AutoML Ensemble (SOTA),0.0,16.67,25.0,54.17,28.75,20.1,450.5
