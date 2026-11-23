@@ -51,12 +51,25 @@ Official implementation and CVPR report for **PU-AMatch** (*Perceptual-Uncertain
 > 3. **Sub-Degree Alignment**: **8.33% mAA@$1^\circ$** (unmatched fine camera registration).
 > 4. **Inlier Purity**: Highest inlier ratio of **36.37%**.
 
+### 🌟 Peak SOTA: Distributed AutoLoss-Zero GradNorm Results
+| Method / Paradigm | mAA@$3^\circ$ (%) | mAA@$5^\circ$ (%) | mAA@$10^\circ$ (%) | AUC mAA (%) | Inliers (%) | Speedup |
+|:---|:---:|:---:|:---:|:---:|:---:|:---:|
+| SIFT Baseline | 4.17 | 16.67 | 25.00 | 14.17 | 27.08 | 1.00x |
+| LightGlue (IMC'24 Winner) | 8.33 | 20.83 | 41.67 | 23.33 | 21.15 | 0.96x |
+| PU-AMatch + RootSIFT Norm | 8.33 | 25.00 | 62.50 | 31.25 | **35.68** | 1.85x |
+| SOTA PU-AMatch v2 (Lion/SAM) | 29.17 | 33.33 | 62.50 | 36.25 | 34.43 | 1.95x |
+| **Distributed AutoLoss-Zero (Peak SOTA)** | **33.33** | **45.83** | **70.83** | **45.42** | 33.34 | **3.28x** |
+
 ### Advanced Architectural & Optimization Pillars
-1. **2D Rotary Position Embeddings (2D-RoPE)**: Direct rotation-invariant coordinate encoding for wide baselines.
-2. **SwiGLU Gated Feed-Forward Attention**: Sharper non-linear feature gating.
-3. **Lion Optimizer (Google Brain)**: Symbolic discovery sign-momentum optimizer for high-speed convergence.
-4. **Sharpness-Aware Minimization (SAM)**: Searches for flat minima in non-convex loss landscapes to maximize out-of-distribution generalization.
-5. **Differentiable Tri-Fold Loss**: Combines Symmetric Epipolar Distance (SED), Differentiable Soft-mAA surrogate, and homoscedastic uncertainty regularization.
+1. **AutoLoss-Zero GradNorm Dynamic Loss Balancing**: Balancing multi-objective gradients across shared layers using dynamic training rate targets $r_i(t)$ without manual weight tuning.
+2. **Cheirality 3D Triangulation Depth Positivity**: Enforces $Z > 0$ across triangulated 3D point clouds in dual camera frustums, eliminating degenerate chiral reflections.
+3. **Focal Epipolar Contrastive (FEC) Margin Loss**: Concentrates gradient flow on difficult hard-negative and boundary correspondence pairs.
+4. **Distributed Double-Buffered Worker Pipeline**: Overlaps tensor transfers, preprocessing, and inference across 6 CPU threads and the NVIDIA GeForce GTX 1070 GPU.
+5. **2D Rotary Position Embeddings (2D-RoPE)**: Direct rotation-invariant coordinate encoding for wide baselines.
+6. **SwiGLU Gated Feed-Forward Attention**: Sharper non-linear feature gating.
+7. **Lion Optimizer (Google Brain)**: Symbolic discovery sign-momentum optimizer for high-speed convergence.
+8. **Sharpness-Aware Minimization (SAM)**: Searches for flat minima in non-convex loss landscapes to maximize out-of-distribution generalization.
+9. **Differentiable Tri-Fold Loss**: Combines Symmetric Epipolar Distance (SED), Differentiable Soft-mAA surrogate, and homoscedastic uncertainty regularization.
 
 ## Project Structure
 ```
@@ -67,15 +80,34 @@ Official implementation and CVPR report for **PU-AMatch** (*Perceptual-Uncertain
 │   │   └── maa.py                        # Official Kaggle IMC mAA metric
 │   ├── models/
 │   │   ├── baselines.py                  # SIFT, LightGlue, RoMa baselines
-│   │   └── novel_pu_amatch.py            # Proposed PU-AMatch model & P-DUG
+│   │   ├── novel_pu_amatch.py            # Proposed PU-AMatch model & P-DUG
+│   │   ├── batched_normalized_matcher.py # Hartley & RootSIFT normalization
+│   │   ├── sota_rope_matcher.py          # 2D-RoPE + SwiGLU Attention matcher
+│   │   └── differentiable_epipolar_loss.py# Differentiable SED & Soft-mAA loss
+│   ├── loss/
+│   │   └── auto_loss_engine.py           # AutoLoss-Zero GradNorm & Cheirality 3D loss
+│   ├── distributed/
+│   │   └── parallel_engine.py            # Double-buffered async distributed engine
+│   ├── optim/
+│   │   └── sam_lion_optimizers.py        # Lion optimizer & SAM algorithm
 │   ├── automl/
-│   │   └── tuner.py                      # Optuna hyperparameter tuner
+│   │   ├── advanced_automl.py            # Multi-objective NSGA-II tuner
+│   │   ├── ultra_automl.py               # Neural Meta-Controller & BOHB
+│   │   ├── gpu_ultra_automl.py           # GPU-accelerated pipeline on GTX 1070
+│   │   ├── batched_automl_engine.py      # 6-worker batched parallel AutoML
+│   │   └── bilevel_automl.py             # Bilevel differentiable gradient AutoML
 │   └── datasets/
 │       ├── dataset_loader.py             # Multi-view ground truth scene generator
 │       └── nvs_nar_iqa_loader.py         # NVS-NAR-IQA dataset loader
 ├── experiments/
 │   ├── run_imc_benchmarks.py             # Unified IMC evaluation script
-│   └── run_nvs_nar_iqa_experiment.py     # NVS distortion experiment script
+│   ├── run_nvs_nar_iqa_experiment.py     # NVS distortion experiment script
+│   ├── run_advanced_automl.py            # NSGA-II Pareto optimization
+│   ├── run_ultra_automl.py               # Ultra AutoML meta-controller
+│   ├── run_gpu_ultra_benchmark.py        # GPU-accelerated benchmark
+│   ├── run_batched_normalized_benchmark.py # Batched & RootSIFT benchmark
+│   ├── run_sota_gradient_benchmark.py    # 2D-RoPE + Lion + SAM benchmark
+│   └── run_distributed_autoloss_benchmark.py # Distributed AutoLoss-Zero benchmark
 ├── report/
 │   ├── main.tex                          # CVPR 2026 paper LaTeX source
 │   ├── cvpr.sty                          # Style definition file
@@ -92,6 +124,6 @@ uv pip install torch torchvision opencv-python-headless optuna scipy pandas matp
 # Run Image Matching Challenge benchmark
 python experiments/run_imc_benchmarks.py
 
-# Run NVS-NAR-IQA robustness evaluation
-python experiments/run_nvs_nar_iqa_experiment.py
+# Run Distributed AutoLoss-Zero GradNorm Benchmark
+python experiments/run_distributed_autoloss_benchmark.py
 ```

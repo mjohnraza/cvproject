@@ -1,0 +1,6 @@
+Method / Optimization Framework,mAA@1deg (%),mAA@3deg (%),mAA@5deg (%),mAA@10deg (%),mAA AUC (%),Inlier Ratio (%),Latency (ms)
+SIFT Baseline,0.0,4.17,16.67,25.0,14.17,27.08,207.4
+LightGlue (IMC'24 Winner),0.0,8.33,20.83,41.67,23.33,21.15,216.2
+PU-AMatch + RootSIFT Norm,0.0,8.33,25.0,62.5,31.25,35.68,490.8
+SOTA PU-AMatch v2 (Lion/SAM),0.0,29.17,33.33,62.5,36.25,34.43,535.7
+Distributed AutoLoss-Zero (Peak SOTA),0.0,33.33,45.83,70.83,45.42,33.34,524.3
