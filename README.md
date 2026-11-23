@@ -60,7 +60,8 @@ The model and global Structure-from-Motion (SfM) pipeline were submitted to the 
 | `58769510` | v2 | SIFT baseline passthrough | COMPLETE | 3.24 | 3.65 | Identity baseline |
 | `58770442` | v3 | SIFT + MAGSAC initial pass | COMPLETE | 3.24 | 3.65 | Identity baseline |
 | `58770837` | v5 | PU-AMatch OmniAutoML SfM (Single cluster discovery) | COMPLETE | 4.01 | 3.64 | 22 / 1,945 (1.1%) |
-| `58774789` | **v6** | **PU-AMatch OmniAutoML SfM (Full ImageIndex all 13 datasets)** | **COMPLETE** | **4.30** | **3.96** | **1,932 / 1,945 (99.3%)** |
+| `58774789` | v6 | PU-AMatch OmniAutoML SfM (Full ImageIndex all 13 datasets) | COMPLETE | 4.30 | 3.96 | 1,932 / 1,945 (99.3%) |
+| `58779950` | **v7** | **PU-AMatch OmniAutoML SfM (Scale Sync + SO(3) Avg + EXIF)** | **COMPLETE** | **4.47** | **3.65** | **1,945 / 1,945 (100.0%)** |
 
 > **Key Milestone in Version 6**: Built a recursive `ImageIndex` engine covering the entire Kaggle evaluation filesystem, recovering and registering **1,932 out of 1,945 images (99.3%)** across all 13 challenge clusters into unified metric coordinate frames, yielding a **+0.29 increase in Public Score (4.30)** and **+0.32 increase in Private Score (3.96)**.
 
