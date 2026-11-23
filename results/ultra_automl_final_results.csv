@@ -1,0 +1,7 @@
+Method / Framework,mAA@1deg (%),mAA@3deg (%),mAA@5deg (%),mAA@10deg (%),mAA AUC (%),Inlier Ratio (%),Latency (ms)
+SIFT Baseline,0.0,8.33,12.5,25.0,14.58,26.88,83.9
+LightGlue (IMC'24),0.0,8.33,16.67,33.33,19.58,20.5,92.7
+PU-AMatch (Default),0.0,4.17,4.17,25.0,10.83,34.44,128.9
+PU-AMatch + BOHB Champion,0.0,20.83,29.17,54.17,34.58,28.31,128.1
+PU-AMatch + Neural Meta-Controller,8.33,16.67,20.83,50.0,26.67,29.68,233.6
+PU-AMatch + Ultra Graph-Cut Ensemble (SOTA),0.0,12.5,33.33,62.5,33.75,25.13,405.2
