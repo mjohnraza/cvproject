@@ -1,0 +1,16 @@
+{
+  "id": "mjohnraza/pu-amatch-omni-automl",
+  "title": "PU-AMatch OmniAutoML Image Matching Solution",
+  "code_file": "kaggle_submission.py",
+  "language": "python",
+  "kernel_type": "script",
+  "is_private": "true",
+  "enable_gpu": "true",
+  "enable_tpu": "false",
+  "enable_internet": "false",
+  "dataset_sources": [],
+  "competition_sources": [
+    "image-matching-challenge-2025"
+  ],
+  "kernel_sources": []
+}
