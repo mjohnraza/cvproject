@@ -1,0 +1,69 @@
+[{"stream_name":"stdout","time":3.078391683,"data":"=== Kaggle IMC 2025: PU-AMatch OmniAutoML SfM Pipeline v7 ===\n"}
+,{"stream_name":"stdout","time":3.144130925,"data":"Loaded sample_submission: 1945 rows across 13 scene clusters.\n"}
+,{"stream_name":"stdout","time":3.170927376,"data":"Pre-wrote initial submission.csv (1945 rows).\n"}
+,{"stream_name":"stdout","time":6.444783919,"data":"  Indexed 2018 images in 3.3s (1937 unique names)\n"}
+,{"stream_name":"stdout","time":6.456153241,"data":"\n"}
+,{"stream_name":"stdout","time":6.456186144,"data":"Processing 13 scene clusters...\n"}
+,{"stream_name":"stdout","time":6.456190742,"data":"\n"}
+,{"stream_name":"stdout","time":6.4576815530000005,"data":"Scene [ETs/cluster0] – 22 images\n"}
+,{"stream_name":"stdout","time":8.18556779,"data":"  Found images: 22/22 | Elapsed: 5s\n"}
+,{"stream_name":"stdout","time":43.536947449,"data":"  Registered 22/22 images via Scale Sync + SO(3) Avg (root=et_et004.png).\n"}
+,{"stream_name":"stdout","time":43.586785682,"data":"  Scene done in 37.1s – CSV flushed.\n"}
+,{"stream_name":"stdout","time":43.587215326,"data":"Scene [amy_gardens/cluster0] – 200 images\n"}
+,{"stream_name":"stdout","time":74.441611408,"data":"  Found images: 200/200 | Elapsed: 71s\n"}
+,{"stream_name":"stdout","time":316.894529009,"data":"  Registered 200/200 images via Scale Sync + SO(3) Avg (root=peach_0102.png).\n"}
+,{"stream_name":"stdout","time":317.094400854,"data":"  Scene done in 273.5s – CSV flushed.\n"}
+,{"stream_name":"stdout","time":317.094580264,"data":"Scene [fbk_vineyard/cluster0] – 163 images\n"}
+,{"stream_name":"stdout","time":331.399715227,"data":"  Found images: 163/163 | Elapsed: 328s\n"}
+,{"stream_name":"stdout","time":526.974419216,"data":"  Registered 163/163 images via Scale Sync + SO(3) Avg (root=vineyard_split_1_frame_1035.png).\n"}
+,{"stream_name":"stdout","time":527.243940077,"data":"  Scene done in 210.1s – CSV flushed.\n"}
+,{"stream_name":"stdout","time":527.244161064,"data":"Scene [imc2023_haiper/cluster0] – 54 images\n"}
+,{"stream_name":"stdout","time":540.462378792,"data":"  Found images: 54/54 | Elapsed: 537s\n"}
+,{"stream_name":"stdout","time":625.120697339,"data":"  Registered 54/54 images via Scale Sync + SO(3) Avg (root=fountain_image_108.png).\n"}
+,{"stream_name":"stdout","time":625.381658391,"data":"  Scene done in 98.1s – CSV flushed.\n"}
+,{"stream_name":"stdout","time":625.381914167,"data":"Scene [imc2023_heritage/cluster0] – 209 images\n"}
+,{"stream_name":"stdout","time":719.434538388,"data":"  Found images: 209/209 | Elapsed: 716s\n"}
+,{"stream_name":"stdout","time":1049.097589542,"data":"  Registered 209/209 images via Scale Sync + SO(3) Avg (root=dioscuri_img_0246.png).\n"}
+,{"stream_name":"stdout","time":1049.500595778,"data":"  Scene done in 424.1s – CSV flushed.\n"}
+,{"stream_name":"stdout","time":1049.500868786,"data":"Scene [imc2023_theather_imc2024_church/cluster0] – 76 images\n"}
+,{"stream_name":"stdout","time":1063.599853375,"data":"  Found images: 76/76 | Elapsed: 1061s\n"}
+,{"stream_name":"stdout","time":1174.881105788,"data":"  Registered 76/76 images via Scale Sync + SO(3) Avg (root=kyiv_puppet_theater_img_20220127_165957.png).\n"}
+,{"stream_name":"stdout","time":1175.30210322,"data":"  Scene done in 125.8s – CSV flushed.\n"}
+,{"stream_name":"stdout","time":1175.302210761,"data":"Scene [imc2024_dioscuri_baalshamin/cluster0] – 138 images\n"}
+,{"stream_name":"stdout","time":1202.973137209,"data":"  Found images: 138/138 | Elapsed: 1200s\n"}
+,{"stream_name":"stdout","time":1425.512564468,"data":"  Registered 138/138 images via Scale Sync + SO(3) Avg (root=baalshamin_19758050972_3e8ee37d98_o.png).\n"}
+,{"stream_name":"stdout","time":1426.016591459,"data":"  Scene done in 250.7s – CSV flushed.\n"}
+,{"stream_name":"stdout","time":1426.016836057,"data":"Scene [imc2024_lizard_pond/cluster0] – 214 images\n"}
+,{"stream_name":"stdout","time":1459.72056783,"data":"  Found images: 214/214 | Elapsed: 1457s\n"}
+,{"stream_name":"stdout","time":1748.216593584,"data":"  Registered 214/214 images via Scale Sync + SO(3) Avg (root=lizard_00161.png).\n"}
+,{"stream_name":"stdout","time":1748.843968566,"data":"  Scene done in 322.8s – CSV flushed.\n"}
+,{"stream_name":"stdout","time":1748.844186388,"data":"Scene [pt_brandenburg_british_buckingham/cluster0] – 225 images\n"}
+,{"stream_name":"stdout","time":1784.600331392,"data":"  Found images: 225/225 | Elapsed: 1782s\n"}
+,{"stream_name":"stdout","time":2151.28761729,"data":"  Registered 225/225 images via Scale Sync + SO(3) Avg (root=british_museum_90095149_11613863483.png).\n"}
+,{"stream_name":"stdout","time":2152.09553147,"data":"  Scene done in 403.3s – CSV flushed.\n"}
+,{"stream_name":"stdout","time":2152.095756646,"data":"Scene [pt_piazzasanmarco_grandplace/cluster0] – 168 images\n"}
+,{"stream_name":"stdout","time":2181.477834189,"data":"  Found images: 168/168 | Elapsed: 2178s\n"}
+,{"stream_name":"stdout","time":2458.233463365,"data":"  Registered 168/168 images via Scale Sync + SO(3) Avg (root=piazza_san_marco_65217461_5742419027.png).\n"}
+,{"stream_name":"stdout","time":2459.06707595,"data":"  Scene done in 307.0s – CSV flushed.\n"}
+,{"stream_name":"stdout","time":2459.067215904,"data":"Scene [pt_sacrecoeur_trevi_tajmahal/cluster0] – 225 images\n"}
+,{"stream_name":"stdout","time":2498.170327628,"data":"  Found images: 225/225 | Elapsed: 2495s\n"}
+,{"stream_name":"stdout","time":2887.881572187,"data":"  Registered 225/225 images via Scale Sync + SO(3) Avg (root=trevi_fountain_91729188_430652744.png).\n"}
+,{"stream_name":"stdout","time":2888.819609653,"data":"  Scene done in 429.8s – CSV flushed.\n"}
+,{"stream_name":"stdout","time":2888.819832902,"data":"Scene [pt_stpeters_stpauls/cluster0] – 200 images\n"}
+,{"stream_name":"stdout","time":2921.672210019,"data":"  Found images: 200/200 | Elapsed: 2919s\n"}
+,{"stream_name":"stdout","time":3265.876447582,"data":"  Registered 200/200 images via Scale Sync + SO(3) Avg (root=st_pauls_cathedral_92227797_2634489539.png).\n"}
+,{"stream_name":"stdout","time":3266.933498459,"data":"  Scene done in 378.1s – CSV flushed.\n"}
+,{"stream_name":"stdout","time":3266.933570299,"data":"Scene [stairs/cluster0] – 51 images\n"}
+,{"stream_name":"stdout","time":3276.192566358,"data":"  Found images: 51/51 | Elapsed: 3273s\n"}
+,{"stream_name":"stdout","time":3330.830410643,"data":"  Registered 51/51 images via Scale Sync + SO(3) Avg (root=stairs_split_1_1710453947066.png).\n"}
+,{"stream_name":"stdout","time":3331.848900585,"data":"  Scene done in 64.9s – CSV flushed.\n"}
+,{"stream_name":"stdout","time":3332.007146104,"data":"\n"}
+,{"stream_name":"stdout","time":3332.007189586,"data":"=== Pipeline Complete in 3329s ===\n"}
+,{"stream_name":"stdout","time":3332.007196198,"data":"Final submission.csv: 1945 rows, 1945 with calibrated poses.\n"}
+,{"stream_name":"stderr","time":3335.201970374,"data":"/usr/local/lib/python3.13/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
+,{"stream_name":"stderr","time":3335.202010883,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
+,{"stream_name":"stderr","time":3335.554695925,"data":"/usr/local/lib/python3.13/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
+,{"stream_name":"stderr","time":3335.554736523,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
+,{"stream_name":"stderr","time":3337.695857668,"data":"[NbConvertApp] Converting notebook __script__.ipynb to html\n"}
+,{"stream_name":"stderr","time":3339.134094838,"data":"[NbConvertApp] Writing 406225 bytes to __results__.html\n"}
+]
