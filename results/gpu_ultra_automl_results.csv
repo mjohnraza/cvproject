@@ -1,0 +1,6 @@
+Method / Architecture,mAA@1deg (%),mAA@3deg (%),mAA@5deg (%),mAA@10deg (%),mAA AUC (%),Inlier Ratio (%),Latency (ms)
+SIFT Baseline (CPU),0.0,8.33,12.5,25.0,14.58,26.88,83.2
+LightGlue Baseline (IMC'24),0.0,8.33,16.67,33.33,19.58,20.5,91.4
+"GPU-PU-AMatch (Default, GTX 1070)",0.0,0.0,4.17,25.0,11.67,30.49,157.8
+GPU-PU-AMatch + Ultra AutoML (GTX 1070),4.17,12.5,29.17,70.83,36.67,28.17,156.9
+"GPU Ultra Graph-Cut Ensemble (GTX 1070, SOTA)",4.17,12.5,37.5,70.83,38.33,29.2,480.1

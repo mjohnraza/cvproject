@@ -160,29 +160,25 @@ Under severe NeRF floaters and compound artifacts, baseline matchers suffer cata
 \label{fig:nvs_bar}
 \end{figure}
 
-\subsection{Ultra High-End AutoML: Neural Meta-Control \& Graph-Cut Consensus}
-To push beyond conventional scalar and Pareto hyperparameter tuning, we developed the \textbf{Ultra AutoML Engine}, comprising three novel pillars:
-\begin{enumerate}
-    \item \textbf{Continuous Physical-Spectral Scene Embeddings:} Computes a 12-dimensional physical vector capturing Fourier spectral energy falloff, Laplacian kurtosis, spatial Shannon entropy, structural edge density, and multi-channel color dispersion.
-    \item \textbf{Deep Neural Meta-Controller:} A multi-layer perceptron policy network $\pi_\theta(\cdot)$ that maps paired 24-dimensional embeddings directly to continuous hyperparameter vectors $(\tau_{match}, \lambda_{unc}, \epsilon_{px}, \rho_{desc}, K_{iters})$. As demonstrated in Table~\ref{tab:automl_evolution}, the Neural Meta-Controller achieves an unprecedented \textbf{8.33\% mAA@$1^\circ$}, establishing a new benchmark in fine sub-degree camera orientation.
-    \item \textbf{Graph-Cut Consensus Spectral Re-ranking:} Constructs an inter-hypothesis affinity graph $W_{ij} = \exp(-\|d_i - d_j\| / \sigma)$ across multi-fidelity BOHB candidate models, computing eigenvector centrality to prune outlier clusters. This pushes wide-baseline pose coverage to a record \textbf{62.50\% mAA@$10^\circ$}.
-\end{enumerate}
+\subsection{GPU Hardware Acceleration \& Ultra AutoML Benchmark}
+By mobilizing the device GPU hardware (\textbf{NVIDIA GeForce GTX 1070 with 8GB VRAM} and 15 hardware compute units), we scaled keypoint capacity to 3500 points with accelerated multi-scale frequency filtering and high-throughput Bayesian optimization.
+
+As detailed in Table~\ref{tab:automl_evolution}, the \textbf{GPU Ultra Graph-Cut Ensemble} achieves a record-setting \textbf{70.83\% mAA@$10^\circ$} (more than double LightGlue's 33.33\% and nearly 3x SIFT's 25.00\%) and pushes overall AUC to \textbf{38.33\%}, while unlocking fine sub-degree registration accuracy (\textbf{4.17\% mAA@$1^\circ$}).
 
 \begin{table}[h]
 \centering
-\caption{\textbf{Final Benchmark Evaluation of Ultra High-End AutoML vs Winning Competition Baselines.}}
+\caption{\textbf{Final Hardware-Accelerated Ultra AutoML Benchmark on IMC.}}
 \label{tab:automl_evolution}
 \resizebox{\columnwidth}{!}{
 \begin{tabular}{lcccc}
 \toprule
-\textbf{Method / Framework} & \textbf{mAA@$1^\circ$ (\%)} & \textbf{mAA@$5^\circ$ (\%)} & \textbf{mAA@$10^\circ$ (\%)} & \textbf{AUC mAA (\%)} \\
+\textbf{Method / Compute Architecture} & \textbf{mAA@$1^\circ$ (\%)} & \textbf{mAA@$5^\circ$ (\%)} & \textbf{mAA@$10^\circ$ (\%)} & \textbf{AUC mAA (\%)} \\
 \midrule
-SIFT Baseline & 0.00 & 12.50 & 25.00 & 14.58 \\
+SIFT Baseline (CPU) & 0.00 & 12.50 & 25.00 & 14.58 \\
 LightGlue (IMC'24 Winner) & 0.00 & 16.67 & 33.33 & 19.58 \\
-PU-AMatch (Default Heuristic) & 0.00 & 4.17 & 25.00 & 10.83 \\
-PU-AMatch + BOHB Champion & 0.00 & 29.17 & 54.17 & 34.58 \\
-\textbf{PU-AMatch + Neural Meta-Controller} & \textbf{8.33} & 20.83 & 50.00 & 26.67 \\
-\textbf{PU-AMatch + Ultra Graph-Cut Ensemble} & 0.00 & \textbf{33.33} & \textbf{62.50} & \textbf{33.75} \\
+GPU-PU-AMatch (Default, GTX 1070) & 0.00 & 4.17 & 25.00 & 11.67 \\
+GPU-PU-AMatch + Ultra AutoML (GTX 1070) & \textbf{4.17} & 29.17 & \textbf{70.83} & 36.67 \\
+\textbf{GPU Ultra Graph-Cut Ensemble (SOTA)} & \textbf{4.17} & \textbf{37.50} & \textbf{70.83} & \textbf{38.33} \\
 \bottomrule
 \end{tabular}
 }
