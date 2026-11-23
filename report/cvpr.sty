@@ -1,0 +1,78 @@
+% CVPR Paper Style File
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{cvpr}[2026 CVPR paper style]
+
+\RequirePackage{times}
+\RequirePackage{epsfig}
+\RequirePackage{graphicx}
+\RequirePackage{amsmath}
+\RequirePackage{amssymb}
+
+% Page dimensions
+\setlength{\textheight}{8.875in}
+\setlength{\textwidth}{6.875in}
+\setlength{\columnsep}{0.3125in}
+\setlength{\topmargin}{0in}
+\setlength{\headheight}{0in}
+\setlength{\headsep}{0in}
+\setlength{\parindent}{1pc}
+\setlength{\oddsidemargin}{-.304in}
+\setlength{\evensidemargin}{-.304in}
+
+\DeclareOption{pagenumbers}{\def\cvpr@pagenumbers{1}}
+\ProcessOptions\relax
+
+\ifdefined\cvpr@pagenumbers
+  \pagestyle{plain}
+\else
+  \pagestyle{empty}
+\fi
+
+\def\maketitle{
+  \par
+  \begingroup
+  \renewcommand\thefootnote{\@fnsymbol\c@footnote}%
+  \def\@makefnmark{\rlap{\@textsuperscript{\normalfont\@thefnmark}}}%
+  \long\def\@makefntext##1{\parindent 1em\noindent
+            \hb@xt@1.8em{%
+                \hss\@textsuperscript{\normalfont\@thefnmark}}##1}%
+  \if@twocolumn
+    \ifnum \col@number=\@ne
+      \@maketitle
+    \else
+      \twocolumn[\@maketitle]%
+    \fi
+  \else
+    \newpage
+    \global\@topnum\z@   % Prevents figures from going at top of page.
+    \@maketitle
+  \fi
+  \thispagestyle{plain}\@thanks
+  \endgroup
+  \setcounter{footnote}{0}%
+  \global\let\thanks\relax
+  \global\let\maketitle\relax
+  \global\let\@maketitle\relax
+  \global\let\@thanks\@empty
+  \global\let\@author\@empty
+  \global\let\@date\@empty
+  \global\let\@title\@empty
+  \global\let\title\relax
+  \global\let\author\relax
+  \global\let\date\relax
+  \global\let\and\relax
+}
+
+\def\@maketitle{
+  \newpage
+  \null
+  \vskip .375in
+  \begin{center}
+    {\Large \bf \@title \par}
+    \vskip .25in
+    {\large \begin{tabular}[t]{c}\@author \end{tabular}\par}
+    \vskip .2in
+  \end{center}
+}
+
+\endinput
