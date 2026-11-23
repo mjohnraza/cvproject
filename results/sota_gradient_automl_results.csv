@@ -1,0 +1,6 @@
+Method / Paradigm,mAA@1deg (%),mAA@3deg (%),mAA@5deg (%),mAA@10deg (%),mAA AUC (%),Inlier Ratio (%),Latency (ms)
+SIFT Baseline,0.0,8.33,12.5,25.0,14.58,26.88,83.5
+LightGlue (IMC'24 Winner),0.0,8.33,16.67,33.33,19.58,20.5,91.6
+PU-AMatch (Default),0.0,4.17,4.17,16.67,7.92,34.01,130.0
+PU-AMatch + RootSIFT Norm,4.17,8.33,25.0,54.17,25.0,33.79,165.3
+SOTA PU-AMatch v2 + Lion/SAM (SOTA),8.33,33.33,50.0,66.67,46.25,36.37,166.7
