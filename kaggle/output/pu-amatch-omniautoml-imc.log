@@ -1,14 +1,41 @@
-[{"stream_name":"stdout","time":3.55757981,"data":"=== Kaggle IMC 2025/2026: PU-AMatch OmniAutoML Solution ===\n"}
-,{"stream_name":"stdout","time":3.608513075,"data":"Loaded 1945 rows from /kaggle/input/image-matching-challenge-2025/sample_submission.csv\n"}
-,{"stream_name":"stdout","time":3.608548369,"data":"Input columns: ['image_id', 'dataset', 'scene', 'image', 'rotation_matrix', 'translation_vector']\n"}
-,{"stream_name":"stdout","time":3.64855534,"data":"Generated submission.csv successfully (1945 rows).\n"}
-,{"stream_name":"stdout","time":3.648580153,"data":"Output columns: ['image_id', 'dataset', 'scene', 'image', 'rotation_matrix', 'translation_vector']\n"}
-,{"stream_name":"stdout","time":3.648584605,"data":"Sample row:\n"}
-,{"stream_name":"stdout","time":3.648815285,"data":"{'image_id': 'ETs_another_et_another_et001.png_public', 'dataset': 'ETs', 'scene': 'cluster0', 'image': 'another_et_another_et001.png', 'rotation_matrix': '0.984538905;0.811159853;0.681088421;0.845092853;0.638842711;0.183570696;0.075868286;0.663749411;0.658267773', 'translation_vector': '0.427962849;0.408638396;0.184856919'}\n"}
-,{"stream_name":"stderr","time":6.12303238,"data":"/usr/local/lib/python3.13/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
-,{"stream_name":"stderr","time":6.123058177,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
-,{"stream_name":"stderr","time":6.433008632,"data":"/usr/local/lib/python3.13/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
-,{"stream_name":"stderr","time":6.433034935,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
-,{"stream_name":"stderr","time":8.341311928,"data":"[NbConvertApp] Converting notebook __script__.ipynb to html\n"}
-,{"stream_name":"stderr","time":9.424219671,"data":"[NbConvertApp] Writing 313649 bytes to __results__.html\n"}
+[{"stream_name":"stdout","time":4.147808559,"data":"=== Kaggle IMC 2025: PU-AMatch OmniAutoML SfM Pipeline ===\n"}
+,{"stream_name":"stdout","time":4.20492745,"data":"Loaded sample_submission with 1945 rows across 13 datasets.\n"}
+,{"stream_name":"stdout","time":4.245375058,"data":"Pre-wrote initial submission.csv to guarantee output file presence.\n"}
+,{"stream_name":"stdout","time":4.254206484,"data":"Found 13 distinct scene clusters to reconstruct.\n"}
+,{"stream_name":"stdout","time":4.256728219,"data":"\n"}
+,{"stream_name":"stdout","time":4.256760084,"data":"Processing Scene: ETs / cluster0 (22 images)...\n"}
+,{"stream_name":"stdout","time":54.719514722,"data":"  Registered 22/22 images into unified global frame (root=another_et_another_et002.png).\n"}
+,{"stream_name":"stdout","time":54.753269097,"data":"\n"}
+,{"stream_name":"stdout","time":54.753300252,"data":"Processing Scene: amy_gardens / cluster0 (200 images)...\n"}
+,{"stream_name":"stdout","time":54.986996392,"data":"\n"}
+,{"stream_name":"stdout","time":54.987033016,"data":"Processing Scene: fbk_vineyard / cluster0 (163 images)...\n"}
+,{"stream_name":"stdout","time":55.285728315,"data":"\n"}
+,{"stream_name":"stdout","time":55.285761741,"data":"Processing Scene: imc2023_haiper / cluster0 (54 images)...\n"}
+,{"stream_name":"stdout","time":55.549244371,"data":"\n"}
+,{"stream_name":"stdout","time":55.549290788,"data":"Processing Scene: imc2023_heritage / cluster0 (209 images)...\n"}
+,{"stream_name":"stdout","time":55.987660503,"data":"\n"}
+,{"stream_name":"stdout","time":55.987691369,"data":"Processing Scene: imc2023_theather_imc2024_church / cluster0 (76 images)...\n"}
+,{"stream_name":"stdout","time":56.414293367,"data":"\n"}
+,{"stream_name":"stdout","time":56.414321858,"data":"Processing Scene: imc2024_dioscuri_baalshamin / cluster0 (138 images)...\n"}
+,{"stream_name":"stdout","time":56.925129062,"data":"\n"}
+,{"stream_name":"stdout","time":56.925159333,"data":"Processing Scene: imc2024_lizard_pond / cluster0 (214 images)...\n"}
+,{"stream_name":"stdout","time":57.579334252,"data":"\n"}
+,{"stream_name":"stdout","time":57.579359819,"data":"Processing Scene: pt_brandenburg_british_buckingham / cluster0 (225 images)...\n"}
+,{"stream_name":"stdout","time":58.35057283,"data":"\n"}
+,{"stream_name":"stdout","time":58.350602616,"data":"Processing Scene: pt_piazzasanmarco_grandplace / cluster0 (168 images)...\n"}
+,{"stream_name":"stdout","time":59.182291288,"data":"\n"}
+,{"stream_name":"stdout","time":59.182317597,"data":"Processing Scene: pt_sacrecoeur_trevi_tajmahal / cluster0 (225 images)...\n"}
+,{"stream_name":"stdout","time":60.150029118,"data":"\n"}
+,{"stream_name":"stdout","time":60.150074802,"data":"Processing Scene: pt_stpeters_stpauls / cluster0 (200 images)...\n"}
+,{"stream_name":"stdout","time":61.219764382,"data":"\n"}
+,{"stream_name":"stdout","time":61.21979605,"data":"Processing Scene: stairs / cluster0 (51 images)...\n"}
+,{"stream_name":"stdout","time":81.076933997,"data":"  Registered 35/51 images into unified global frame (root=stairs_split_2_1710453745156.png).\n"}
+,{"stream_name":"stdout","time":82.128640376,"data":"\n"}
+,{"stream_name":"stdout","time":82.128672594,"data":"=== Final submission.csv saved successfully (1945 rows) ===\n"}
+,{"stream_name":"stderr","time":85.202094678,"data":"/usr/local/lib/python3.13/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
+,{"stream_name":"stderr","time":85.202148259,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
+,{"stream_name":"stderr","time":85.598945737,"data":"/usr/local/lib/python3.13/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
+,{"stream_name":"stderr","time":85.598994096,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
+,{"stream_name":"stderr","time":87.940316534,"data":"[NbConvertApp] Converting notebook __script__.ipynb to html\n"}
+,{"stream_name":"stderr","time":89.341831464,"data":"[NbConvertApp] Writing 344189 bytes to __results__.html\n"}
 ]
