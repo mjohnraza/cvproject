@@ -1,0 +1,7 @@
+Method / Optimization Framework,mAA@1deg (%),mAA@3deg (%),mAA@5deg (%),mAA@10deg (%),mAA AUC (%),Inlier Ratio (%),Latency (ms)
+SIFT Baseline,0.0,8.33,12.5,25.0,14.58,26.88,267.3
+LightGlue (IMC'24),0.0,8.33,16.67,33.33,19.58,20.5,288.5
+PU-AMatch (Default),0.0,4.17,4.17,25.0,9.58,34.97,553.6
+PU-AMatch + RootSIFT Norm,0.0,8.33,16.67,54.17,24.58,34.11,554.2
+PU-AMatch + Hartley Norm,0.0,0.0,0.0,0.0,0.0,88.56,674.9
+PU-AMatch + Batched Norm AutoML (SOTA),0.0,16.67,33.33,58.33,30.42,29.49,477.1
